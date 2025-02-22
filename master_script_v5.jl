@@ -39,8 +39,8 @@ dim = (30, 30, 5);  sys3Qs = [];  sys1Qs = [];
 Threads.@threads for id in 1:npar
   tmp3Q, _ = CoTaS_5var(dim, J1, j2, j3, jc1, jc2; rng = MersenneTwister(id));
   tmp1Q, _ = CoTaS_5var(dim, J1, j2, j3, jc1, jc2; rng = MersenneTwister(id), b1 = 0.00);
-  for x in axes(sys3Q.dipoles,1), y in axes(sys3Q.dipoles,2), 
-        z in axes(sys3Q.dipoles,3), b in axes(sys3Q.dipoles,4)
+  for x in axes(tmp3Q.dipoles,1), y in axes(tmp3Q.dipoles,2), 
+        z in axes(tmp3Q.dipoles,3), b in axes(tmp3Q.dipoles,4)
     idx = mod1(x,3);  idy = mod1(y,3);
     tmp3Q.dipoles[x,y,z,b] = +1 * sys_small_3Q.dipoles[idx,idy,1,b];
     tmp1Q.dipoles[x,y,z,b] = +1 * sys_small_1Q.dipoles[idx,idy,1,b];
