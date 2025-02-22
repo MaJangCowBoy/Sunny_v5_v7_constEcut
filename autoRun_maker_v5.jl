@@ -17,6 +17,6 @@ fid = open("autoRun_v5.sh","w");
 @printf(fid,"#!/bin/bash\n")
 for (i,j2) in enumerate(j2_sweep), (j,jc2) in enumerate(jc2_sweep)
   id = (i-1) * length(jc2_sweep) + j;
-  @printf(fid,"sbatch autoRun_%d.sh\n",id);
+  @printf(fid,"sbatch autoBatch_%d.sh\n",id);
 end
 close(fid)
