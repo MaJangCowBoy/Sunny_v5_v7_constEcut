@@ -1,6 +1,6 @@
 using Printf
 
-j2_sweep  = 0.4:0.1:0.8;  jc2_sweep =-0.1:0.1:0.3;
+j2_sweep  = 0.4:0.1:0.8;  jc2_sweep =-0.1:0.1:0.7;
 
 for (i,j2) in enumerate(j2_sweep), (j,jc2) in enumerate(jc2_sweep)
   id = (i-1) * length(jc2_sweep) + j;
