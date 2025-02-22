@@ -83,7 +83,8 @@ ratios = 0.50:0.05:0.90;
 sqw_3Q_1 = zeros(Float64,3,N,N,length(ratios));  sqw_1Q_1 = zeros(Float64,3,N,N,length(ratios));
 sqw_3Q_2 = zeros(Float64,3,N,N,length(ratios));  sqw_1Q_2 = zeros(Float64,3,N,N,length(ratios));
 
-Threads.@threads for (q,(basis1, basis2)) in enumerate(zip(basis1s, basis2s))
+Threads.@threads for q in 1:3
+  basis1 = basis1s[q];  basis2 = basis2s[q];
   qptsL001 = [ shift + x * basis1 + y * basis2  for x in xGrd, y in yGrd ];
   global sqw_3Q_0[q,:,:,:] = intensities_interpolated(sc3Q, qptsL001, formula; interpolation = :linear);
   global sqw_1Q_0[q,:,:,:] = intensities_interpolated(sc1Q, qptsL001, formula; interpolation = :linear);
@@ -129,12 +130,12 @@ for (i,ratio) in enumerate(ratios)
   figure = CairoMakie.Figure();  ax = CairoMakie.Axis(figure[1,1]; aspect = 2/√3);
   heatmap!(ax, xGrd, yGrd, data2Dcut3Q; colormap = :viridis);
   xlims!(ax,-0.5,0.5);  ylims!(ax,-0.5,0.5);
-  filename = @sprintf("data2Dcut3Q_%.3f.png",ratio);  save(filename, figure);
+  filename = @sprintf("data2Dcut3Q_%.2f_%.2f_%.3f.png",j2,jc2,ratio);  save(filename, figure);
   
   figure = CairoMakie.Figure();  ax = CairoMakie.Axis(figure[1,1]; aspect = 2/√3);
   heatmap!(ax, xGrd, yGrd, data2Dcut1Q; colormap = :viridis);
   xlims!(ax,-0.5,0.5);  ylims!(ax,-0.5,0.5);
-  filename = @sprintf("data2Dcut1Q_%.3f.png",ratio);  save(filename, figure);
+  filename = @sprintf("data2Dcut1Q_%.2f_%.2f_%.3f.png",j2,jc2,ratio);  save(filename, figure);
 end
 
 filename = @sprintf("constEcut_%.2f_%.2f.h5",j2,jc2);
