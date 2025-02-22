@@ -58,7 +58,7 @@ sc1Qs = [dynamical_correlations(sys1Qs[id]; dt, nω, ωmax) for id in 1:npar];
 
 damping = 0.1;  ntherm = 4000;
 langevin = Langevin(dt; kT, damping);  
-Threads.@threads for _ in 1:npar
+Threads.@threads for id in 1:npar
   for _ in 1:ntherm  step!(sys3Qs[id], langevin);  step!(sys1Qs[id], langevin);  end
   add_sample!(sc3Qs[id], sys3Qs[id]);  add_sample!(sc1Qs[id], sys1Qs[id]);
 end
