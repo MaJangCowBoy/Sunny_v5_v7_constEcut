@@ -52,11 +52,11 @@ end
 #? calculate the dynamical correlation
 # =======================================
 
-ωmax = 10.0;  nω = 501;
+dt = 0.02;  ωmax = 10.0;  nω = 501;
 sc3Qs = [dynamical_correlations(sys3Qs[id]; dt, nω, ωmax) for id in 1:npar];
 sc1Qs = [dynamical_correlations(sys1Qs[id]; dt, nω, ωmax) for id in 1:npar];
 
-damping = 0.1;  dt = 0.02;  ntherm = 4000;
+damping = 0.1;  ntherm = 4000;
 langevin = Langevin(dt; kT, damping);  
 Threads.@threads for _ in 1:npar
   for _ in 1:ntherm  step!(sys3Qs[id], langevin);  step!(sys1Qs[id], langevin);  end
