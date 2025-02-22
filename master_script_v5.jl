@@ -72,7 +72,7 @@ formula = intensity_formula(sc3Q, :perp; formfactors, kT);  Elist = available_en
 
 shift  = [ 0.0, 0.0, 1.0];
 
-N = 151;  xGrd = [ x for x in range(-0.5,0.5,N)];  yGrd = [ y for y in range(-0.5,0.5,N)];
+N = 201;  xGrd = [ x for x in range(-1.0,1.0,N)];  yGrd = [ y for y in range(-1.0,1.0,N)];
 
 basis1s = [ [ 1.0, 0.0, 0.0], [ 0.0, 1.0, 0.0], [-1.0, 1.0, 0.0] ];
 basis2s = [ [-0.5, 1.0, 0.0], [ 1.0,-0.5, 0.0], [ 0.5, 0.5, 0.0] ];
@@ -129,12 +129,12 @@ for (i,ratio) in enumerate(ratios)
   
   figure = CairoMakie.Figure();  ax = CairoMakie.Axis(figure[1,1]; aspect = 2/√3);
   heatmap!(ax, xGrd, yGrd, data2Dcut3Q; colormap = :viridis);
-  xlims!(ax,-0.5,0.5);  ylims!(ax,-0.5,0.5);
+  xlims!(ax,-1.0,1.0);  ylims!(ax,-1.0,1.0);
   filename = @sprintf("data2Dcut3Q_%.2f_%.2f_%.3f.png",j2,jc2,ratio);  save(filename, figure);
   
   figure = CairoMakie.Figure();  ax = CairoMakie.Axis(figure[1,1]; aspect = 2/√3);
   heatmap!(ax, xGrd, yGrd, data2Dcut1Q; colormap = :viridis);
-  xlims!(ax,-0.5,0.5);  ylims!(ax,-0.5,0.5);
+  xlims!(ax,-1.0,1.0);  ylims!(ax,-1.0,1.0);
   filename = @sprintf("data2Dcut1Q_%.2f_%.2f_%.3f.png",j2,jc2,ratio);  save(filename, figure);
 end
 
