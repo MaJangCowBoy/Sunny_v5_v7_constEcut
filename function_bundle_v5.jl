@@ -3,7 +3,7 @@ function CoTaS_5var(dim, J1, j2, j3, jc1, jc2; b1 = 0.06, rng = MersenneTwister(
   CoTaS = Crystal("CoTaS.cif"; symprec = 1e-3);
   cryst = subcrystal(CoTaS,"Co");  S = 1.5;
   randomN = Int64(round(100*rand(rng)));
-  sys = System(cryst, dim, [SpinInfo(1, S, g=2)], :dipole; seed=randomN); 
+  sys = System(cryst, dim, [SpinInfo(1, S = S, g=2)], :dipole; seed=randomN); 
   # option --> :dipole, :heisenberg, :ising
 
   B1  = b1 * J1;
