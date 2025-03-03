@@ -37,7 +37,7 @@ sys_small_1Q = system_initialize(sys_small_1Q, "1Q_1", J1);  print_wrapped_inten
 dim = (30, 30, 5);  sys3Qs = [];  sys1Qs = [];
 
 Threads.@threads for id in 1:npar
-  tmp3Q, _ = CoTaS_5var(dim, J1, j2, j3, jc1, jc2; rng = MersenneTwister(id));
+  tmp3Q, _ = CoTaS_5var(dim, J1, j2, j3, jc1, jc2; rng = MersenneTwister(id), b1 = bq);
   tmp1Q, _ = CoTaS_5var(dim, J1, j2, j3, jc1, jc2; rng = MersenneTwister(id), b1 = 0.00);
   for x in axes(tmp3Q.dipoles,1), y in axes(tmp3Q.dipoles,2), 
         z in axes(tmp3Q.dipoles,3), b in axes(tmp3Q.dipoles,4)
